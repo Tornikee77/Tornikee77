@@ -2,33 +2,46 @@
 
 // მაგალითი 1
 
-let name = "Alice";
+let usrername: string = "Alice";
 
 // მაგალითი 2
 
-let numbers = [1, 2, 3];
+let numbers: number[] = [1, 2, 3];
 
 // მაგალითი 3
 
-function multiply(a, b) {
+function multiply(a: number, b: number) {
   return a * b;
 }
 
 // მაგალითი 4
+type userType = {
+  id: number;
+  name: string;
+};
 
-const user = { id: 1, name: "Alice" };
+const user: userType = { id: 1, name: "Alice" };
 
 // მაგალითი 5
 // რისთვის ვიყენებთ არსებული კოდში = Guest-ს :
 
 function greet(name: string = "Guest") {}
 
-// პასუხი:
+// პასუხი: თუ ფუნქციას პარამეტრი არ გადაეცემა, name ავტომატურად მიიღებს Guest.
 
 // მაგალითი 6
 // დაწერეთ ტიპი რომელიც მოერგება ყველა ქვემოთ ჩამოთვლილ ელემენტს. მაგ: type Config = {
 
-const config1 = {
+type uniConfigtype = {
+  theme?: string;
+  options?: {
+    fontSize?: number;
+    layout?: null;
+  };
+  tester?: string;
+};
+
+const config1: uniConfigtype = {
   theme: "dark",
   options: {
     fontSize: 16,
@@ -36,36 +49,57 @@ const config1 = {
   },
 };
 
-const config2 = {
+const config2: uniConfigtype = {
   theme: "dark",
 };
 
-const config3 = {
+const config3: uniConfigtype = {
   tester: "test",
 };
 
 // მაგალითი 7
 // დაწერეთ ტიპი რომელიც მოერგება ყველა ქვემოთ ჩამოთვლილ ელემენტს. მაგ: type MixedArray =
-const array1 = [42, "hello", { name: "Alice" }];
-const array2 = ["apple", true, { isValid: false }];
-const array3 = [];
+type MixedArray = (string | number | boolean | object)[];
+const array1: MixedArray = [42, "hello", { name: "Alice" }];
+const array2: MixedArray = ["apple", true, { isValid: false }];
+const array3: MixedArray = [];
 
 // მაგალითი 8
 // აღწერეთ რისი ტიპიზაცია ხდება არსებულ კოდში წერილობით
 
 type Handler = {
   process?: () => string;
+  // ფუნქცია იღებს და აბრუნებს სტრინგს
   validate?: (input: string) => boolean;
+  // არგუმენტად იღებს სტრინგს და აბრუნებს booleans
   log?: () => void;
+  // ფუნქცია არაფერს არ აბრუნებს
 };
 
 // მაგალითი 9
 
 // შექმენით ტიპი მონაცემისთივს:
 
-type User = {};
+type User = {
+  id: number;
+  username: string;
+  isAdmin: boolean;
+  profile: {
+    fullName: string;
+    age: number;
+    interests: string[];
+  };
+  settings: {
+    theme: string;
+    notifications: {
+      email: boolean;
+      sms: boolean;
+    };
+  };
+  metadata: undefined;
+};
 
-const user: User = {
+const username: User = {
   id: 101,
   username: "tech_learner",
   isAdmin: false,
